@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        margin: 0;
+        display: flex;
+        height: 100vh;
+    }
+    .section {
+        flex: 1;
+        position: relative;
+    }
+    .circle {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        animation: fadeOut 2s ease-out forwards;
+    }
+    @keyframes fadeOut {
+        0% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+</style>
+
+<body>
+    <div id="section1" class="section"></div>
+    <div id="section2" class="section"></div>
+    <div id="section3" class="section"></div>
+
+    <script>
+        function createCircle(section, color) {
+            const circle = document.createElement('div');
+            circle.className = 'circle';
+            circle.style.backgroundColor = color;
+            circle.style.left = Math.random() * (section.offsetWidth - 80) + 'px';
+            circle.style.top = Math.random() * (section.offsetHeight - 80) + 'px';
+            section.appendChild(circle);
+            setTimeout(() => circle.remove(), 2000);
+        }
+
+        section1 = 72
+        section2 = 84
+        section3 = 96
+
+        navigator.requestMIDIAccess().then(midi => {
+            for (let input of midi.inputs.values()) {
+                input.onmidimessage = msg => {
+                    if (msg.data[0] >= 144 && msg.data[0] <= 159 && msg.data[2] > 0) {
+                        if (msg.data[1] >= section1 && msg.data[1] < section2) {
+                            createCircle(document.getElementById('section1'), '#FF0000');
+                        }
+                        else if (msg.data[1] >= section2 && msg.data[1] < section3) {
+                            createCircle(document.getElementById('section2'), '#00FF00');
+                        }
+                        else if (msg.data[1] >= section3){
+                            createCircle(document.getElementById('section3'), '#0000FF');
+                        }
+                    }
+                };
+            }
+        });
+    </script>
+</body>
+</html>
