@@ -5,6 +5,7 @@
         margin: 0;
         display: flex;
         height: 100vh;
+        background: #000000;
     }
     .section {
         flex: 1;
@@ -39,22 +40,22 @@
             setTimeout(() => circle.remove(), 2000);
         }
 
-        section1 = 72
-        section2 = 84
-        section3 = 96
+        section1 = 0
+        section2 = 51
+        section3 = 80
 
         navigator.requestMIDIAccess().then(midi => {
             for (let input of midi.inputs.values()) {
                 input.onmidimessage = msg => {
                     if (msg.data[0] >= 144 && msg.data[0] <= 159 && msg.data[2] > 0) {
                         if (msg.data[1] >= section1 && msg.data[1] < section2) {
-                            createCircle(document.getElementById('section1'), '#FF0000');
+                            createCircle(document.getElementById('section1'), '#FF5CCC');
                         }
                         else if (msg.data[1] >= section2 && msg.data[1] < section3) {
-                            createCircle(document.getElementById('section2'), '#00FF00');
+                            createCircle(document.getElementById('section2'), '#DC52BF');
                         }
                         else if (msg.data[1] >= section3){
-                            createCircle(document.getElementById('section3'), '#0000FF');
+                            createCircle(document.getElementById('section3'), '#B947B1');
                         }
                     }
                 };
