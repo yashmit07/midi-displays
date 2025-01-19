@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        margin: 0;
+        display: flex;
+        height: 100vh;
+        background: #e9e8d9;
+    }
+    .section {
+        flex: 1;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .dot {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+    }
+    .circle {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        animation: pulse 2s ease-out forwards;
+    }
+    @keyframes pulse {
+        0% { 
+            width: 80px;
+            height: 80px;
+            opacity: 0.3;
+        }
+        100% { 
+            width: 800px;
+            height: 800px;
+            opacity: 0;
+        }
+    }
+</style>
+
+<body>
+    <div id="section1" class="section">
+        <div class="dot" style="background: #e4760e"></div>
+    </div>
+    <div id="section2" class="section">
+        <div class="dot" style="background: #c91073"></div>
+    </div>
+    <div id="section3" class="section">
+        <div class="dot" style="background: #7a0aae"></div>
+    </div>
+
+    <script>
+        function createCircle(section, color) {
+            const circle = document.createElement('div');
+            circle.className = 'circle';
+            circle.style.backgroundColor = color;
+            section.appendChild(circle);
+            setTimeout(() => circle.remove(), 2000);
+        }
+
+        section1 = 72
+        section2 = 84
+        section3 = 96
+
+        navigator.requestMIDIAccess().then(midi => {
+            for (let input of midi.inputs.values()) {
+                input.onmidimessage = msg => {
+                    if (msg.data[0] >= 144 && msg.data[0] <= 159 && msg.data[2] > 0) {
+                        if (msg.data[1] >= section1 && msg.data[1] < section2) {
+                            createCircle(document.getElementById('section1'), '#e4760e');
+                        }
+                        else if (msg.data[1] >= section2 && msg.data[1] < section3) {
+                            createCircle(document.getElementById('section2'), '#c91073');
+                        }
+                        else if (msg.data[1] >= section3){
+                            createCircle(document.getElementById('section3'), '#7a0aae');
+                        }
+                    }
+                };
+            }
+        });
+    </script>
+</body>
+</html>

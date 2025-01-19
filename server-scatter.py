@@ -10,7 +10,7 @@ server = HTTPServer(('localhost', PORT), SimpleHTTPRequestHandler)
 print(f"Server started at http://localhost:{PORT}")
 
 # Open the browser automatically
-webbrowser.open(f'http://localhost:{PORT}/midi_display.html')
+webbrowser.open(f'http://localhost:{PORT}/midi_display_scatter.html')
 
 # Keep the server running
 try:
