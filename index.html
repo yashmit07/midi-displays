@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MIDI Visualizations</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>MIDI Visualizations</h1>
+    
+    <p>Choose a visualization style:</p>
+    
+    <div>
+        <a href="midi_display_stationary.html" class="button">Stationary Visualization</a>
+        <a href="midi_display_scatter.html" class="button">Scatter Visualization</a>
+    </div>
+
+    <h2>About</h2>
+    <p>This web application creates visual representations of MIDI input. Connect a MIDI device to see colorful visualizations respond to your playing.</p>
+    
+    <h2>Requirements</h2>
+    <ul>
+        <li>A modern web browser that supports WebMIDI (Chrome or Edge recommended)</li>
+        <li>A connected MIDI device</li>
+    </ul>
+
+    <h2>Note Ranges</h2>
+    <ul>
+        <li>Lower range: Notes 72-83 (C4-B4)</li>
+        <li>Middle range: Notes 84-95 (C5-B5)</li>
+        <li>Upper range: Notes 96+ (C6 and above)</li>
+    </ul>
+</body>
+</html>
